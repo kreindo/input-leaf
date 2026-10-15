@@ -716,16 +716,8 @@ class ConnectionService : Service() {
         }
     }
 
-    @Suppress("DEPRECATION")
     private fun getScreenBounds(): Rect {
-        val wm = getSystemService(WindowManager::class.java)
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            wm.currentWindowMetrics.bounds
-        } else {
-            val size = Point()
-            wm.defaultDisplay.getSize(size)
-            Rect(0, 0, size.x, size.y)
-        }
+        return com.inputleaf.android.util.ScreenUtils.getScreenBounds(this)
     }
 
     private fun autoSwitchImeToOurs() {

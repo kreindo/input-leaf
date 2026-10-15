@@ -519,8 +519,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
 
     private suspend fun resolveInjector(preferredMethod: String? = null): com.inputleaf.android.inject.InputInjector? {
         val method = preferredMethod ?: prefs.inputMethod.first()
-        val wm = getApplication<Application>().getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager
-        val bounds = wm.currentWindowMetrics.bounds
+        val bounds = com.inputleaf.android.util.ScreenUtils.getScreenBounds(getApplication())
         val snapshot = PrivilegeSnapshot(
             shizukuReady = permissionProvider.shizukuStatus.value == ShizukuStatus.READY,
             root = permissionProvider.rootAvailability(),
